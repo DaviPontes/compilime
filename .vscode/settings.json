@@ -3,5 +3,7 @@
         "Analyser",
         "consts",
         "STRINGVAL"
-    ]
+    ],
+    "editor.formatOnSave": true,
+    "python.formatting.autopep8Args": ["--ignore","E402"]
 }
