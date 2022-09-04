@@ -63,7 +63,7 @@ class LexicalAnalyser:
                 num_aux.append(self.next_char)
                 self.next_char = self.arq.read(1)
                 if self.next_char == '.' and i == 0:
-                    i = i+1
+                    i = i + 1
                     num_aux.append(self.next_char)
                     self.next_char = self.arq.read(1)
             text = sep.join(num_aux)
@@ -228,5 +228,7 @@ class LexicalAnalyser:
             token_aux = self.next_token()
         if self.lexical_error:
             print("There are lexical errors.")
+            return False
         else:
             print("No lexical errors.")
+            return True
