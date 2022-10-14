@@ -1,5 +1,7 @@
 from typing import List
+from lexical.core import LexicalAnalyser
 from objects import *
+from semantic.enums import Errors
 
 symbolTable: List[Object] = []
 symbolTableLast: List[Object] = []
@@ -62,3 +64,13 @@ def Find(aName: int) -> Object:
             break
 
     return obj
+
+def RaiseError(lexical: LexicalAnalyser, errCode: Errors):
+    print(f"Raised error on line {lexical.line} - ")
+    match errCode:
+        case Errors.ERR_REDECL:
+            print("Variable already declared")
+        case Errors.ERR_NOT_DECL:
+            print("Variable not declared")
+        case Errors.ERR_TYPE_EXPECTED:
+            print("Type expected")

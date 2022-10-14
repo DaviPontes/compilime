@@ -6,6 +6,7 @@ class LexicalAnalyser:
     v_consts = []
     arq = None
     lexical_error = False
+    secondary_token = None
 
     def __init__(self, file):
         file.seek(0)
@@ -38,7 +39,7 @@ class LexicalAnalyser:
     def next_token(self):
         sep = ""
         text = ""
-        secondary_token = None
+        self.secondary_token = None
 
         while self.next_char.isspace():
             self.next_char = self.arq.read(1)
@@ -55,7 +56,7 @@ class LexicalAnalyser:
             text = sep.join(text_aux)
             token = self.search_key_word(text)
             if token == KeyWords.ID:
-                secondary_token = self.search_name(text)
+                self.secondary_token = self.search_name(text)
 
         elif self.next_char.isnumeric():
             num_aux = []
@@ -69,7 +70,7 @@ class LexicalAnalyser:
                     self.next_char = self.arq.read(1)
             text = sep.join(num_aux)
             token = KeyWords.NUMERAL
-            secondary_token = self.add_const(text)
+            self.secondary_token = self.add_const(text)
 
         elif self.next_char == "\"":
             string_aux = []
@@ -80,14 +81,14 @@ class LexicalAnalyser:
             self.next_char = self.arq.read(1)
             text = sep.join(string_aux)
             token = KeyWords.STRINGVAL
-            secondary_token = self.add_const(text)
+            self.secondary_token = self.add_const(text)
 
         else:
             if self.next_char == "\'":
                 self.next_char = self.arq.read(1)
                 text = self.next_char
                 token = KeyWords.CHARACTER
-                secondary_token = self.add_const(text)
+                self.secondary_token = self.add_const(text)
                 self.next_char = self.arq.read(2)
             elif self.next_char == ":":
                 text = self.next_char
@@ -216,9 +217,9 @@ class LexicalAnalyser:
             self.lexical_error = True
         #     print("<\"" + text + "\", " + token.name +
         #           "> - Here is a lexical error\n")
-        # elif token != KeyWords.EOF and secondary_token != None:
+        # elif token != KeyWords.EOF and self.secondary_token != None:
         #     print("<\"" + text + "\", " + token.name +
-        #           ", Secondary Token: " + str(secondary_token) + ">\n")
+        #           ", Secondary Token: " + str(self.secondary_token) + ">\n")
         # elif token != KeyWords.EOF:
         #     print("<\"" + text + "\", " + token.name + ">\n")
         return token
@@ -233,3 +234,6 @@ class LexicalAnalyser:
         else:
             print("No Lexical Error")
             return True
+
+    def get_const(self, pos):
+        return self.v_consts[pos]

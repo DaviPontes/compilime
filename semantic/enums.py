@@ -57,5 +57,44 @@ class Kinds(Enum):
     UNIVERSAL_ = 8
 
 
+class Errors(Enum):
+    ERR_REDECL = 0  #ok
+    ERR_NOT_DECL = 1  #ok
+    ERR_TYPE_EXPECTED = 2  #ok
+    ERR_BOOL_TYPE_EXPECTED = 3
+    ERR_TYPE_MISMATCH = 4
+    ERR_INVALID_TYPE = 5
+    ERR_KIND_NOT_STRUCT = 6
+    ERR_FIELD_NOT_DECL = 7
+    ERR_KIND_NOT_ARRAY = 8
+    ERR_INVALID_INDEX_TYPE = 9
+    ERR_KIND_NOT_VAR = 10
+    ERR_KIND_NOT_FUNCTION = 11
+    ERR_TOO_MANY_ARG = 12
+    ERR_PARAM_TYPE = 13
+    ERR_TOO_FEW_ARGS = 14
+    ERR_RETURN_TYPE_MISMATCH = 15
+
+
 class SemanticRules(Enum):
-    IDD_lalala = 10
+    IDD_Id = 0
+    IDU_Id = 1
+    ID_Id = 2
+    NB = 3
+    DT = 4
+    DF = 5
+    T_Integer = 6
+    T_Char = 7
+    T_Boolean = 8
+    T_String = 9
+    T_IDU = 10
+    LI_IDD = 11
+    LI_COMMA_IDD = 12
+    DV_VAR = 13
+    TRUE = 14
+    FALSE = 15
+    CHR = 16
+    STR = 17
+    NUM = 18
+    DT_ARRAY = 19
+    DT_ALIAS = 20
