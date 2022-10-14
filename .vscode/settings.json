@@ -5,5 +5,9 @@
         "STRINGVAL"
     ],
     "editor.formatOnSave": true,
-    "python.formatting.autopep8Args": ["--ignore","E402"]
+    "python.formatting.autopep8Args": [
+        "--ignore",
+        "E402"
+    ],
+    "python.formatting.provider": "yapf"
 }

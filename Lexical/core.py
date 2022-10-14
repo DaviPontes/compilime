@@ -48,7 +48,8 @@ class LexicalAnalyser:
 
         elif self.next_char.isalpha():
             text_aux = []
-            while self.next_char.isalpha() or self.next_char == '_' or self.next_char.isnumeric():
+            while self.next_char.isalpha(
+            ) or self.next_char == '_' or self.next_char.isnumeric():
                 text_aux.append(self.next_char)
                 self.next_char = self.arq.read(1)
             text = sep.join(text_aux)
@@ -213,13 +214,13 @@ class LexicalAnalyser:
 
         if token == KeyWords.UNKNOWN:
             self.lexical_error = True
-            print("<\"" + text + "\", " + token.name +
-                  "> - Here is a lexical error\n")
-        elif token != KeyWords.EOF and secondary_token != None:
-            print("<\"" + text + "\", " + token.name +
-                  ", Secondary Token: " + str(secondary_token) + ">\n")
-        elif token != KeyWords.EOF:
-            print("<\"" + text + "\", " + token.name + ">\n")
+        #     print("<\"" + text + "\", " + token.name +
+        #           "> - Here is a lexical error\n")
+        # elif token != KeyWords.EOF and secondary_token != None:
+        #     print("<\"" + text + "\", " + token.name +
+        #           ", Secondary Token: " + str(secondary_token) + ">\n")
+        # elif token != KeyWords.EOF:
+        #     print("<\"" + text + "\", " + token.name + ">\n")
         return token
 
     def check(self):
@@ -227,8 +228,8 @@ class LexicalAnalyser:
         while token_aux != KeyWords.EOF:
             token_aux = self.next_token()
         if self.lexical_error:
-            print("There are lexical errors.")
+            print("Lexical Error")
             return False
         else:
-            print("No lexical errors.")
+            print("No Lexical Error")
             return True
