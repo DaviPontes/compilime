@@ -28,14 +28,24 @@ class Var:
 class Param:
     pType: Object = None
 
+    def __init__(self, ptype: Object):
+        self.pType = ptype
+
 
 class Field:
     pType: Object = None
+
+    def __init__(self, pType: Object):
+        self.pType = pType
 
 
 class Function:
     pRetType: Object = None
     pParams: Object = None
+
+    def __init__(self, pRetType: Object, pParams: Object):
+        self.pRetType = pRetType
+        self.pParams = pParams
 
 
 class Array:
@@ -49,6 +59,9 @@ class Array:
 
 class Struct:
     pFields: Object = None
+
+    def __init__(self, pFields):
+        self.pFields = pFields
 
 
 class Alias:
@@ -149,6 +162,20 @@ class NUM:
         self.val = val
         self.pos = pos
         self.type = type
+
+
+class DC:
+    list: Object
+
+    def __init__(self, list: Object):
+        self.list = list
+
+
+class LP:
+    list: Object
+
+    def __init__(self, list: Object):
+        self.list = list
 
 
 class t_attrib:

@@ -76,36 +76,57 @@ s = 84
 true = 85
 false = 86
 B = 59
+MC = 87
+MF = 88
+NB = 89
+NF = 90
+id = 91
 
-
-table_columns=[NOT, NOT_EQUAL, AND, LEFT_PARENTHESIS, RIGHT_PARENTHESIS, TIMES, PLUS, PLUS_PLUS, COMMA, MINUS, MINUS_MINUS, DOT, DIVIDE, COLON, SEMI_COLON, 
-              LESS_THAN, LESS_OR_EQUAL, EQUALS, EQUAL_EQUAL, GREATER_THAN, GREATER_OR_EQUAL, LEFT_SQUARE, RIGHT_SQUARE, ARRAY, BOOLEAN, BREAK, C, CHAR, 
-              CONTINUE, DO, ELSE, false, FUNCTION, ID, IF, INTEGER, N, OF, s, STRING, STRUCT, true, TYPE, VAR, WHILE, LEFT_BRACES, OR, RIGHT_BRACES,
-              EOF, B, CHR, DC, DE, DF, DT, DV, E, F, FALSE, IDD, IDU, L, LDE, LDV, LE, LI, LP, LS, LV, NUM, P, R, S, STR, T, TRUE, Y]
-
-
+table_columns = [
+    NOT, NOT_EQUAL, AND, LEFT_PARENTHESIS, RIGHT_PARENTHESIS, TIMES, PLUS,
+    PLUS_PLUS, COMMA, MINUS, MINUS_MINUS, DOT, DIVIDE, COLON, SEMI_COLON,
+    LESS_THAN, LESS_OR_EQUAL, EQUALS, EQUAL_EQUAL, GREATER_THAN,
+    GREATER_OR_EQUAL, LEFT_SQUARE, RIGHT_SQUARE, ARRAY, BOOLEAN, BREAK, C,
+    CHAR, CONTINUE, DO, ELSE, false, FUNCTION, ID, IF, INTEGER, N, OF, s,
+    STRING, STRUCT, true, TYPE, VAR, WHILE, LEFT_BRACES, OR, RIGHT_BRACES, EOF,
+    B, CHR, DC, DE, DF, DT, DV, E, F, FALSE, id, IDD, IDU, L, LDE, LDV, LE, LI,
+    LP, LS, LV, MC, MF, NB, NF, NUM, P, R, S, STR, T, TRUE, Y
+]
 
 import csv
 
+
 def init_table():
-    action_table = list(csv.reader(open("Syntatical/action_table.csv","r"), delimiter = ","))
-    for i in range(1,160):
+    action_table = list(
+        csv.reader(open("Syntatical/action_table.csv", "r"), delimiter=","))
+    for i in range(1, 160):
         for j in range(78):
             if j == 0:
-                action_table[i][j] = str(action_table[i][j])   
+                action_table[i][j] = str(action_table[i][j])
             elif action_table[i][j] == '':
                 action_table[i][j] = 0
             elif action_table[i][j].startswith('r'):
-                action_table[i][j]=-59   
+                action_table[i][j] = -59
             elif action_table[i][j] == 'a':
-                action_table[i][j]='acc'
+                action_table[i][j] = 'acc'
             else:
                 action_table[i][j] = int(action_table[i][j])
     return action_table
 
-LEN = [4, 1, 5, 3 , 1, 1, 8 , 9, 7, 4, 5, 3, 3, 1, 1, 2, 2, 2, 2, 3, 4, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 1, 2, 1, 2, 1, 3, 1, 3, 1, 5, 3, 2, 1, 3, 4, 1, 1, 1, 3, 3, 1, 5, 7, 5, 7 , 1, 4, 2, 2, 1, 1, 1, 1, 1, 1, 1, 3, 3, 1]
 
-LEFT =  [B, CHR, DC, DC, DE, DE, DF, DT, DT, DT, DV, E, E, E, F, F, F, F, F, F, F, F, F, F, F, F, F, F, FALSE, IDD, IDU, L, L, L, L, L, L, L, LDE, LDE, LDV, LDV, LE, LE, LI, LI, LP, LP,LS, LS, LV, LV, LV, NUM, P, R, R, R, S, S, S, S, S, S, S, S, STR, T, T, T, T, T, TRUE, Y, Y, Y]
+LEN = [
+    4, 1, 5, 3, 1, 1, 10, 9, 8, 4, 5, 3, 3, 1, 1, 2, 2, 2, 2, 3, 5, 2, 2, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 1, 2, 1, 2, 1, 3, 1, 3, 1, 5, 3, 2,
+    1, 3, 4, 1, 0, 0, 0, 0, 1, 1, 3, 3, 1, 5, 7, 5, 7, 2, 4, 2, 2, 1, 1, 1, 1,
+    1, 1, 1, 3, 3, 1
+]
+
+LEFT = [
+    B, CHR, DC, DC, DE, DE, DF, DT, DT, DT, DV, E, E, E, F, F, F, F, F, F, F,
+    F, F, F, F, F, F, F, FALSE, ID, IDD, IDU, L, L, L, L, L, L, L, LDE, LDE,
+    LDV, LDV, LE, LE, LI, LI, LP, LP, LS, LS, LV, LV, LV, MC, MF, NB, NF, NUM,
+    P, R, R, R, S, S, S, S, S, S, S, S, STR, T, T, T, T, T, TRUE, Y, Y, Y
+]
 
 
 def token_tab(a):
