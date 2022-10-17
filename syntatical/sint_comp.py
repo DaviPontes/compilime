@@ -1,4 +1,5 @@
-from Syntatical.states import *
+from syntatical.states import *
+from semantic.core import *
 
 action_table = init_table()
 
