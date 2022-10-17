@@ -52,7 +52,7 @@ class SyntaticalAnalyser:
                     self.syntatical_error = True
                     print("Syntax Error")
                     break
-                #SemanticAnalyser(self.parser, r)
+                SemanticAnalysis(self.parser, r)
 
             else:
                 self.syntatical_error = True
