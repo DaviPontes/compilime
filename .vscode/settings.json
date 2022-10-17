@@ -1,0 +1,15 @@
+{
+    "cSpell.words": [
+        "Analyser",
+        "consts",
+        "REDCL",
+        "REDECL",
+        "STRINGVAL"
+    ],
+    "editor.formatOnSave": true,
+    "python.formatting.autopep8Args": [
+        "--ignore",
+        "E402"
+    ],
+    "python.formatting.provider": "yapf"
+}
