@@ -98,7 +98,7 @@ import csv
 
 def init_table():
     action_table = list(
-        csv.reader(open("Syntatical/action_table.csv", "r"), delimiter=","))
+        csv.reader(open("syntatical/action_table.csv", "r"), delimiter=","))
     for i in range(1, 160):
         for j in range(78):
             if j == 0:
