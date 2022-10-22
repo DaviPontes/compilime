@@ -116,27 +116,39 @@ class BOOL:
         self.type = type
         
 class E:
-    def __init__(self, type = None):
+    type: Object
+
+    def __init__(self, type: Object):
         self.type = type
 
 class L:
-    def __init__(self, type = None):
+    type: Object
+
+    def __init__(self, type: Object):
         self.type = type
 
 class R:
-    def __init__(self, type = None):
+    type: Object
+
+    def __init__(self, type: Object):
         self.type = type
 
 class Y:
-    def __init__(self, type = None):
+    type: Object
+
+    def __init__(self, type: Object):
         self.type = type
 
 class F:
-    def __init__(self, type = None):
+    type: Object
+
+    def __init__(self, type: Object):
         self.type = type
 
 class LV:
-    def __init__(self, type = None):
+    type: Object
+
+    def __init__(self, type: Object):
         self.type = type
 
 class MC:
