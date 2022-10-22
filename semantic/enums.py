@@ -121,29 +121,87 @@ class Errors(Enum):
 
 
 class SemanticRules(Enum):
-    IDD_RULE = 30
-    IDU_RULE = 31
-    ID_RULE = 30
-    NB_RULE = 57
-    DT_STRUCT_RULE = 9
-    DF_RULE = 7
-    T_INTEGER_RULE = 68
-    T_CHAR_RULE = 69
-    T_BOOL_RULE = 70
-    T_STRING_RULE = 71
-    T_IDU_RULE = 72
-    LI_IDD_RULE = 46
-    LI_LI_IDD_RULE = 45
-    DV_RULE = 11
-    TRUE_RULE = 73
-    FALSE_RULE = 29
-    CHR_RULE = 2
-    STR_RULE = 67
-    NUM_RULE = 54
-    DT_ARRAY_RULE = 8
-    DT_IDD_RULE = 10
-    DC_DC_LI_RULE = 4
-    DC_DC_LI_T_RULE = 3
-    LP_IDD_RULE = 48
-    LP_LP_IDD_RULE = 47
+    P_LDE_RULE = 60 #P LDE
+    LDE_LDE_RULE = 40 #LDE LDE DE
+    LDE_DE_RULE = 41 #LDE DE
+    DE_DF_RULE = 5 #DE DF
+    DE_DT_RULE = 6 #DE DT
+    T_INTEGER_RULE = 73 #T integer
+    T_CHAR_RULE = 74 #T char
+    T_BOOL_RULE = 75 #T boolean
+    T_STRING_RULE = 76 #T string
+    T_IDU_RULE = 77 #T IDU
+    DT_ARRAY_RULE = 8 #DT type IDD = array [ NUM ] of T
+    DT_STRUCT_RULE = 9 #DT type IDD = struct NB { DC }
+    DT_ALIAS_RULE = 10 #DT type IDD = T
+    DC_DC_RULE = 3 #DC DC ; LI : T
+    DC_LI_RULE = 4 #DC LI : T
+    DF_RULE = 7 #DF function IDD NB ( LP ) : T MF B
+    LP_LP_RULE = 48 #LP LP , IDD : T
+    LP_IDD_RULE = 49 #LP IDD : T
+    B_LS_RULE = 1 #B { LDV LS }
+    LDV_LDV_RULE = 42 #LDV LDV DV
+    LDV_DV_RULE = 43 #LDV DV
+    LS_LS_RULE = 50 #LS LS S
+    LS_S_RULE = 51 #LS S
+    DV_VAR_RULE = 11 #DV var LI : T ;
+    LI_COMMA_RULE = 46 #LI LI , IDD
+    LI_IDD_RULE = 47 #LI IDD
+    M_IF_RULE = 64 #S if ( E ) S
+    M_IF_ELSE_M_RULE = 65 #S if ( E ) S else S
+    M_WHILE_RULE = 66 #S while ( E ) S
+    M_DO_WHILE_RULE = 67 #S do S while ( E ) ;
+    M_BLOCK_RULE = 68 #S B
+    M_E_SEMICOLON_RULE = 69 #S LV = E ;
+    M_BREAK_RULE = 70 #S break ;
+    M_CONTINUE_RULE = 71 #S continue ;
+    E_AND_RULE = 12 #E E && L
+    E_OR_RULE = 13 #E E || L
+    E_L_RULE = 14 #E L
+    L_LESS_THAN_RULE = 33 #L L < R
+    L_GREATER_THAN_RULE = 34 #L L > R
+    L_LESS_EQUAL_RULE = 35 #L L <= R
+    L_GREATER_EQUAL_RULE = 36 #L L >= R
+    L_EQUAL_EQUAL_RULE = 37 #L L == R
+    L_NOT_EQUAL_RULE = 38 #L L != R
+    L_R_RULE = 39 #L R
+    R_PLUS_RULE = 61 #R R + Y
+    R_MINUS_RULE = 62 #R R - Y
+    R_Y_RULE =63 #R Y
+    Y_TIMES_RULE = 79 #Y Y * F
+    Y_DIVIDE_RULE = 80 #Y Y / F
+    Y_F_RULE = 81 #Y F
+    F_LV_RULE = 15 #F LV
+    F_LEFT_PLUS_PLUS_RULE = 16 #F ++ LV
+    F_LEFT_MINUS_MINUS_RULE = 17 #F -- LV
+    F_RIGHT_PLUS_PLUS_RULE = 18 #F LV ++
+    F_RIGHT_MINUS_MINUS_RULE = 19 #F LV --
+    F_PARENTHESIS_E_RULE = 20 #F ( E )
+    F_IDU_MC_RULE = 21 #F IDU MC ( LE )
+    F_MINUS_F_RULE = 22 #F - F
+    F_NOT_F_RULE = 23 #F ! F
+    F_TRUE_RULE = 24 #F TRUE
+    F_FALSE_RULE = 25 #F FALSE
+    F_CHR_RULE = 26 #F CHR
+    F_STR_RULE = 27 #F STR
+    F_NUM_RULE = 28 #F NUM
+    LE_LE_RULE = 44 #LE LE , E
+    LE_E_RULE = 45 #LE E
+    LV_DOT_RULE =52 #LV LV . IDU
+    LV_SQUARE_RULE = 53 #LV LV [ E ]
+    LV_IDU_RULE = 54 #LV IDU
+    ID_RULE = 30 #ID id
+    IDD_RULE = 31 # IDD id
+    IDU_RULE = 32 #IDU id
+    TRUE_RULE = 78 #TRUE true
+    FALSE_RULE = 29 #FALSE false
+    CHR_RULE = 2 #CHR c
+    STR_RULE = 72 #STR s
+    NUM_RULE = 59 #NUM n
+    MC_RULE = 55
     MF_RULE = 56
+    NB_RULE = 57
+    NF_RULE = 58
+    MT_RULE = 82
+    ME_RULE = 83
+    MW_RULE = 84
