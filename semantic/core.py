@@ -191,7 +191,7 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
 
             LP_ = t_attrib(States.LP, LP(p))
             StackSem.append(LP_)
-        case SemanticRules.LP_LP_IDD_RULE:
+        case SemanticRules.LP_LP_RULE:
             T_ = StackSem.pop()
             IDD_ = StackSem.pop()
             LP1_ = StackSem.pop()
