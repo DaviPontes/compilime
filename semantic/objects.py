@@ -114,6 +114,71 @@ class BOOL:
     ):
         self.val = val
         self.type = type
+        
+class E:
+    def __init__(self, type = None):
+        self.type = type
+
+class L:
+    def __init__(self, type = None):
+        self.type = type
+
+class R:
+    def __init__(self, type = None):
+        self.type = type
+
+class Y:
+    def __init__(self, type = None):
+        self.type = type
+
+class F:
+    def __init__(self, type = None):
+        self.type = type
+
+class LV:
+    def __init__(self, type = None):
+        self.type = type
+
+class MC:
+    def __init__(self, type = None, param = None, err = None):
+        self.type = type
+        self.param = param
+        self.err = err
+
+class MT:
+    def __init__(self, label = None):
+        self.label = label   
+
+class ME:
+    def __init__(self, label = None):
+        self.label = label
+
+class MW:
+    def __init__(self, label = None):
+        self.label = label
+
+class MA:
+    def __init__(self, label = None):
+        self.label = label
+
+class LE:
+    def __init__(self, type = None, param = None, err = None, n = None):
+        self.type = type
+        self.param = param
+        self.err = err
+        self.n = n
+
+
+class TRUE:
+    def __init__(self, type = None, val = None):
+        self.type = type
+        self.val = val
+
+class FALSE:
+    def __init__(self, type = None, val = None):
+        self.type = type
+        self.val = val
+
 
 
 class CHR:
@@ -185,3 +250,6 @@ class t_attrib:
     def __init__(self, nont: States, _=None):
         self.nont = nont
         self._ = _
+
+        
+
