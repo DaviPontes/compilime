@@ -100,3 +100,31 @@ def RaiseError(lexical: LexicalAnalyser, errCode: Errors):
             print("Too few parameters")
         case Errors.ERR_RETURN_TYPE_MISMATCH :
             print("Invalid return type")
+            
+            
+def check_type(a,b):
+    if a == b:
+        return True
+    elif a == universal_ or b == universal_:
+        return True
+    elif a.eKind == UNIVERSAL_ or b.eKind == UNIVERSAL_:
+        return True
+    elif a.eKind == ALIAS_TYPE_ and b.eKind != ALIAS_TYPE_:
+        return check_type(a._.pBaseType,b)
+    elif a.eKind != ALIAS_TYPE_ and b.eKind == ALIAS_TYPE_:
+        return check_type(a,b._.pBaseType)
+    elif a.eKind == b.eKind:
+        if a.eKind == ALIAS_TYPE_:
+            return check_type(a._.pBaseType,b._.pBaseType)
+        elif a.eKind == ARRAY_TYPE_:
+            if a._.nNumElems == b._.nNumElems:
+                return check_type(a._.pElemType,b._.pElemType)
+        elif a.eKind == STRUCT_TYPE_:
+            c = a._.pFields
+            d = b._.pFields
+            while c != None and d != None:
+                if not check_type(c._.pType,d._.pType):
+                    return False
+            return (c == None and d == None)
+    else:
+        return False
