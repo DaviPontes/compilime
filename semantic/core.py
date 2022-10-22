@@ -73,12 +73,12 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
             IDD_: t_attrib = StackSem.pop()
             LI_ = t_attrib(States.LI, LI(IDD_._.object))
             StackSem.append(LI_)
-        case SemanticRules.LI_LI_IDD_RULE:
+        case SemanticRules.LI_COMMA_RULE:
             IDD_: t_attrib = StackSem.pop()
             LI1_: t_attrib = StackSem.pop()
             LI0_ = t_attrib(States.LI, LI(LI1_._.object))
             StackSem.append(LI0_)
-        case SemanticRules.DV_RULE:
+        case SemanticRules.DV_VAR_RULE:
             T_: t_attrib = StackSem.pop()
             LI_: t_attrib = StackSem.pop()
             
