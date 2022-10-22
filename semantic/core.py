@@ -124,7 +124,7 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
 
             DT_ = t_attrib(States.DT)
             StackSem.append(DT_)
-        case SemanticRules.DT_IDD_RULE:
+        case SemanticRules.DT_ALIAS_RULE:
             T_ = StackSem.pop()
             IDD_ = StackSem.pop()
 
