@@ -136,7 +136,7 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
 
             DT_ = t_attrib(States.DT)
             StackSem.append(DT_)
-        case SemanticRules.DC_DC_LI_RULE:
+        case SemanticRules.DC_LI_RULE:
             T_ = StackSem.pop()
             LI_ = StackSem.pop()
 
@@ -150,7 +150,7 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
 
             DC_ = t_attrib(States.DC, DC(LI_.list))
             StackSem.append(DC_)
-        case SemanticRules.DC_DC_LI_T_RULE:
+        case SemanticRules.DC_DC_RULE:
             T_ = StackSem.pop()
             LI_ = StackSem.pop()
             DC1_ = StackSem.pop()
