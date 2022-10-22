@@ -5,8 +5,11 @@ from semantic.scopeAnalyzer import Define, EndBlock, Find, NewBlock, RaiseError,
 from semantic.typeAnalyzer import IS_TYPE_KIND, int_, char_, bool_, string_, universal_
 
 StackSem = []
+label = 0
 
 def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
+    
+    code_generation = open("generated_code.txt", "a+")
     match SemanticRules(ruleNumber):
         case SemanticRules.IDD_RULE:
             name = lexical.secondary_token
