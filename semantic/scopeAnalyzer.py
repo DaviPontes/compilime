@@ -102,7 +102,7 @@ def RaiseError(lexical: LexicalAnalyser, errCode: Errors):
             print("Invalid return type")
             
             
-def check_type(a,b):
+def type_check(a,b):
     if a == b:
         return True
     elif a == universal_ or b == universal_:
