@@ -11,8 +11,8 @@ T_IDU_RULE = 77 #T IDU
 DT_ARRAY_RULE = 8 #DT type IDD = array [ NUM ] of T
 DT_STRUCT_RULE = 9 #DT type IDD = struct NB { DC }
 DT_ALIAS_RULE = 10 #DT type IDD = T
-DC_DC_LI_T_RULE = 3 #DC DC ; LI : T
-DC_DC_LI_RULE = 4 #DC LI : T
+DC_DC_RULE = 3 #DC DC ; LI : T
+DC_LI_RULE = 4 #DC LI : T
 DF_RULE = 7 #DF function IDD NB ( LP ) : T MF B
 LP_LP_IDD_RULE = 48 #LP LP , IDD : T
 LP_IDD_RULE = 49 #LP IDD : T
