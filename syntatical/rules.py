@@ -26,12 +26,12 @@ LI_COMMA_RULE = 46 #LI LI , IDD
 LI_IDD_RULE = 47 #LI IDD
 S_IF_RULE = 64 #S if ( E ) S
 S_ELSE_RULE = 65 #S if ( E ) S else S
-S_WHILE_RULE = 66 #S while ( E ) S
-S_DO_RULE = 67 #S do S while ( E ) ;
-S_B_RULE = 68 #S B
-S_LV_RULE = 69 #S LV = E ;
-S_BREAK_RULE = 70 #S break ;
-S_CONTINUE_RULE = 71 #S continue ;
+M_WHILE_RULE = 66 #S while ( E ) S
+M_DO_WHILE_RULE = 67 #S do S while ( E ) ;
+M_BLOCK_RULE = 68 #S B
+M_E_SEMICOLON_RULE = 69 #S LV = E ;
+M_BREAK_RULE = 70 #S break ;
+M_CONTINUE_RULE = 71 #S continue ;
 E_AND_RULE = 12 #E E && L
 E_OR_RULE = 13 #E E || L
 E_L_RULE = 14 #E L
