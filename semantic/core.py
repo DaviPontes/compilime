@@ -217,3 +217,453 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
 
             f.eKind = Kinds.ARRAY_TYPE_
             f._ = Function(T_._.type, LP_._.list)
+            
+        case SemanticRules.NF_RULE:
+            IDD_ = StackSem[-1]
+            f = IDD_._.object
+            f.eKind = FUNCTION_
+            f._ = Function(None,None)
+            NewBlock()
+
+        case SemanticRules.U_IF_RULE:
+            MT_ = StackSem.pop()
+            E_ = StackSem.pop()
+            t = E_._.type
+            if not type_check(t,bool_):
+                RaiseError(lexical, ERR_BOOL_TYPE_EXPECTED)
+            code_generation.write("L"+str(MT_._.label)+"\n")
+
+        case SemanticRules.U_IF_ELSE_U_RULE:
+            ME_ = StackSem.pop()
+            MT_ = StackSem.pop()
+            E_ = StackSem.pop()
+            t = E_._.type
+            if not type_check(t,bool_):
+                RaiseError(lexical, ERR_BOOL_TYPE_EXPECTED)
+            code_generation.write("L"+str(ME_._.label)+"\n")
+
+        case SemanticRules.M_IF_ELSE_M_RULE:
+            ME_ = StackSem.pop()
+            MT_ = StackSem.pop()
+            E_ = StackSem.pop()
+            t = E_._.type
+            if not type_check(t,bool_):
+                RaiseError(lexical, ERR_BOOL_TYPE_EXPECTED)
+            code_generation.write("L"+str(ME_._.label)+"\n")
+
+        case SemanticRules.M_WHILE_RULE:
+            MT_ = StackSem.pop()
+            E_ = StackSem.pop()
+            MW_ = StackSem.pop()
+            print(E_)
+            print(E_._)
+            t = E_._.type
+            if not type_check(t,bool_):
+                RaiseError(lexical, ERR_BOOL_TYPE_EXPECTED)
+            code_generation.write("\tJMP_BW L"+'0'+"\nL"+str(MT_._.label)+"\n")        
+
+        case SemanticRules.M_DO_WHILE_RULE:
+            E_ = StackSem.pop()
+            MW_ = StackSem.pop()
+            t = E_._.type
+            if not type_check(t,bool_):
+                RaiseError(lexical, ERR_BOOL_TYPE_EXPECTED)
+            code_generation.write("\tNOT\n\tTJMP_BW L"+str(MW_._.label)+"\n")  
+
+        case SemanticRules.E_AND_RULE:
+            L_ = StackSem.pop()
+            E1_ = StackSem.pop()
+            if not type_check(E1_._.type,bool_):
+                RaiseError(lexical, ERR_BOOL_TYPE_EXPECTED)
+            if not type_check(L_._.type,bool_):
+                RaiseError(lexical, ERR_BOOL_TYPE_EXPECTED)
+            E0_ = t_attrib(E,None,E(bool_))
+            StackSem.append(E0_)
+            code_generation.write("\tAND"+"\n")
+
+        case SemanticRules.E_OR_RULE:
+            L_ = StackSem.pop()
+            E1_ = StackSem.pop()
+            if not type_check(E1_._.type,bool_):
+                RaiseError(lexical, ERR_BOOL_TYPE_EXPECTED)
+            if not type_check(L_._.type,bool_):
+                RaiseError(lexical, ERR_BOOL_TYPE_EXPECTED)
+            E0_ = t_attrib(E,None,E(bool_))
+            StackSem.append(E0_)
+            code_generation.write("\tOR"+"\n")
+
+        case SemanticRules.E_L_RULE:
+            L_ = StackSem.pop()
+            E_ = t_attrib(E,None,E(L_._.type))
+            StackSem.append(E_)
+
+        case SemanticRules.L_LESS_THAN_RULE:
+            R_ = StackSem.pop()
+            L1_ = StackSem.pop()
+            if not type_check(L1_._.type,R_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            L0_ = t_attrib(L,None,L(bool_))
+            StackSem.append(L0_)
+            code_generation.write("\tLT"+"\n")
+
+        case SemanticRules.L_GREATER_THAN_RULE:
+            R_ = StackSem.pop()
+            L1_ = StackSem.pop()
+            if not type_check(L1_._.type,R_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            L0_ = t_attrib(L,None,bool_)
+            StackSem.append(L0_)
+            code_generation.write("\tGT"+"\n")
+
+        case SemanticRules.L_LESS_EQUAL_RULE:
+            R_ = StackSem.pop()
+            L1_ = StackSem.pop()
+            if not type_check(L1_._.type,R_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            L0_ = t_attrib(L,None,bool_)
+            StackSem.append(L0_)
+            code_generation.write("\tLE"+"\n")
+
+        case SemanticRules.L_GREATER_EQUAL_RULE:
+            R_ = StackSem.pop()
+            L1_ = StackSem.pop()
+            if not type_check(L1_._.type,R_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            L0_ = t_attrib(L,None,bool_)
+            StackSem.append(L0_)
+            code_generation.write("\tGE"+"\n")
+
+        case SemanticRules.L_EQUAL_EQUAL_RULE:
+            R_ = StackSem.pop()
+            L1_ = StackSem.pop()
+            if not type_check(L1_._.type,R_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            L0_ = t_attrib(L,None,bool_)
+            StackSem.append(L0_)
+            code_generation.write("\tEQ"+"\n")
+
+        case SemanticRules.L_NOT_EQUAL_RULE:
+            R_ = StackSem.pop()
+            L1_ = StackSem.pop()
+            if not type_check(L1_._.type,R_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            L0_ = t_attrib(L,None,bool_)
+            StackSem.append(L0_)
+            code_generation.write("\tNE"+"\n")
+
+        case SemanticRules.L_R_RULE:
+            R_ = StackSem.pop()
+            L_ = t_attrib(L,None,L(R_._.type))
+            StackSem.append(L_)
+
+        case SemanticRules.R_PLUS_RULE:
+            Y_ = StackSem.pop()
+            R1_ = StackSem.pop()
+            if not type_check(R1_._.type,Y_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            if not type_check(R1_._.type,int_) and not type_check(R1_._.type,string_):
+                RaiseError(lexical, ERR_INVALID_TYPE)
+            R0_ = t_attrib(R,None,R(R1_._.type))
+            StackSem.append(R0_)
+            code_generation.write("\tADD"+"\n")
+
+        case SemanticRules.R_MINUS_RULE:
+            Y_ = StackSem.pop()
+            R1_ = StackSem.pop()
+            if not type_check(R1_._.type,Y_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            if not type_check(R1_._.type,int_):
+                RaiseError(lexical, ERR_INVALID_TYPE)
+            R0_ = t_attrib(R,None,R(R1_._.type))
+            StackSem.append(R0_)
+            code_generation.write("\tSUB"+"\n")
+
+        case SemanticRules.R_Y_RULE:
+            Y_ = StackSem.pop()
+            R_ = t_attrib(R,None,R(Y_._.type))
+            StackSem.append(R_)
+
+        case SemanticRules.Y_TIMES_RULE:
+            F_ = StackSem.pop()
+            Y1_ = StackSem.pop()
+            if not type_check(Y1_._.type,F_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            if not type_check(Y1_._.type,int_):
+                RaiseError(lexical, ERR_INVALID_TYPE)
+            Y0_ = t_attrib(Y,None,Y(Y1_._.type))
+            StackSem.append(Y0_)
+            code_generation.write("\tMUL"+"\n")
+
+        case SemanticRules.Y_DIVIDE_RULE:
+            F_ = StackSem.pop()
+            Y1_ = StackSem.pop()
+            if not type_check(Y1_._.type,F_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            if not type_check(Y1_._.type,int_):
+                RaiseError(lexical, ERR_INVALID_TYPE)
+            Y0_ = t_attrib(Y,None,Y(Y1_._.type))
+            StackSem.append(Y0_)
+            code_generation.write("\tDIV"+"\n")
+
+        case SemanticRules.Y_F_RULE:
+            F_ = StackSem.pop()
+            Y_ = t_attrib(Y,None,Y(F_._.type))
+            StackSem.append(Y_)
+
+        case SemanticRules.F_LV_RULE:
+            LV_ = StackSem.pop()
+            n = 0
+            F_ = t_attrib(F,None,F(LV_._.type))
+            StackSem.append(F_)
+            code_generation.write("\tDE_REF "+str(n)+"\n")
+
+        case SemanticRules.F_LEFT_PLUS_PLUS_RULE:
+            LV_ = StackSem.pop()
+            t = LV_._.type
+            if not type_check(t,int_):
+                RaiseError(lexical, ERR_INVALID_TYPE)
+            F_ = t_attrib(F,None,F(int_))
+            code_generation.write("\tDUP\n\tDUP\n\tDE_REF 1"+"\n")
+            code_generation.write("\tINC\n\tSTORE REF 1\n\tDE_REF 1"+"\n")
+
+        case SemanticRules.F_LEFT_MINUS_MINUS_RULE:
+            LV_ = StackSem.pop()
+            t = LV_._.type
+            if not type_check(t,int_):
+                RaiseError(lexical, ERR_INVALID_TYPE)
+            F_ = t_attrib(F,None,F(LV_._.type))
+            StackSem.append(F_)
+            code_generation.write("\tDUP\n\tDUP\n\tDE_REF 1"+"\n")
+            code_generation.write("\tDEC\n\tSTORE_REF 1\n\tDE_REF 1"+"\n")
+
+        case SemanticRules.F_RIGHT_PLUS_PLUS_RULE:
+            LV_ = StackSem.pop()
+            t = LV_._.type
+            if not type_check(t,int_):
+                RaiseError(lexical, ERR_INVALID_TYPE)
+            F_ = t_attrib(F,None,F(LV_._.type))
+            StackSem.append(F_)
+            code_generation.write("\tDUP\n\tDUP\n\tDE_REF 1"+"\n")
+            code_generation.write("\tINC\n\tSTORE_REF 1\n\tDE_REF 1"+"\n")
+            code_generation.write("\tDEC"+"\n")
+
+        case SemanticRules.F_RIGHT_MINUS_MINUS_RULE:
+            LV_ = StackSem.pop()
+            t = LV_._.type
+            if not type_check(t,int_):
+                RaiseError(lexical, ERR_INVALID_TYPE)
+            F_ = t_attrib(F,None,F(t))
+            StackSem.append(F_)
+            code_generation.write("\tDUP\n\tDUP\n\tDE_REF 1"+"\n")
+            code_generation.write("\tDEC\n\tSTORE_REF 1\n\tDE_REF 1"+"\n")
+            code_generation.write("\tINC"+"\n")
+
+        case SemanticRules.F_PARENTHESIS_E_RULE:
+            E_ = StackSem.pop()
+            F_ = t_attrib(F,None,F(E_._.type))
+            StackSem.append(F_)
+
+        case SemanticRules.F_MINUS_F_RULE:
+            F1_ = StackSem.pop()
+            t = F1_._.type
+            if not type_check(t,int_):
+                RaiseError(lexical, ERR_INVALID_TYPE)
+            F0_ = t_attrib(F,None,F(t))
+            StackSem.append(F0_)
+            code_generation.write("\tNEG"+"\n")
+
+        case SemanticRules.F_NOT_F_RULE:
+            F1_ = StackSem.pop()
+            t = F1_._.type
+            if not type_check(t,bool_):
+                RaiseError(lexical, ERR_INVALID_TYPE)
+            F0_ = t_attrib(F,None,F(t))
+            StackSem.append(F0_)
+            code_generation.write("\tNOT"+"\n")
+
+        case SemanticRules.F_TRUE_RULE:
+            TRU_ = StackSem.pop()
+            F_ = t_attrib(F,None,F(bool_))
+            StackSem.append(F_)
+            code_generation.write("\tLOAD_TRUE"+"\n")
+
+        case SemanticRules.F_FALSE_RULE:
+            FALS_ = StackSem.pop()
+            F_ = t_attrib(F,None,F(bool_))
+            StackSem.append(F_)
+            code_generation.write("\tLOAD_FALSE"+"\n")
+
+        case SemanticRules.F_CHR_RULE:
+            CHR_ = StackSem.pop()
+            F_ = t_attrib(F,None,F(char_))
+            StackSem.append(F_)
+            n = lexical.secondary_Token
+            code_generation.write("\tLOAD_CONST "+"\n")
+
+
+        case SemanticRules.F_STR_RULE:
+            STR_ = StackSem.pop()
+            F_ = t_attrib(F,None,F(string_))
+            StackSem.append(F_)
+            n = lexical.secondary_Token
+            code_generation.write("\tLOAD_CONST "+"\n")
+
+        case SemanticRules.F_NUM_RULE:
+            NUM_ = StackSem.pop()
+            F_ = t_attrib(F,None,F(int_))
+            StackSem.append(F_)
+            n = lexical.secondary_Token
+            code_generation.write("\tLOAD_CONST "+"\n")
+
+
+        case SemanticRules.LV_DOT_RULE:
+            ID_ = StackSem.pop()
+            LV1_ = StackSem.pop()
+            t = LV1_._.type
+            if t.eKind != STRUCT_TYPE_:
+                if t.eKind != UNIVERSAL_:
+                    RaiseError(lexical, ERR_KIND_NOT_STRUCT)
+                LV0_ = t_attrib(LV,None,LV(universal_))
+            else:
+                p = t._.pFields
+                while p != None:
+                    if p.aName == ID_._.name:
+                        break
+                    p = p.pNext
+                if p == None:
+                    RaiseError(lexical, ERR_FIELD_NOT_DECL)
+                    LV0_ = t_attrib(LV,None,LV(universal_))
+                else:
+                    LV0_ = t_attrib(LV,None,LV(p._.pType))
+            StackSem.append(LV0_)
+            code_generation.write("\tADD "+"\n")
+
+        case SemanticRules.LV_SQUARE_RULE:
+            E_ = StackSem.pop()
+            LV1_ = StackSem.pop()
+            t = LV1_._.type
+            if type_check(t,string_):
+                LV0_ = t_attrib(LV,None,LV(char_))
+            elif t.eKind!=ARRAY_TYPE_:
+                if t.eKind != UNIVERSAL_:
+                    RaiseError(lexical, ERR_KIND_NOT_ARRAY)
+                LV0_ = t_attrib(LV,None,LV(universal_))
+            else:
+                LV0_ = t_attrib(LV,None,LV(t._.tipoElemento))
+                code_generation.write("\tMUL "+str(n)+"\n")
+                code_generation.write("\tADD"+"\n")
+            if not type_check(E_._.type,int_):
+                RaiseError(lexical, ERR_INVALID_INDEX_TYPE)
+            StackSem.append(LV0_)
+
+        case SemanticRules.LV_IDU_RULE:
+            IDU_ = StackSem.pop()
+            p = IDU_._.object
+            if p.eKind != VAR_ and p.eKind!=PARAM_:
+                if p.eKind != UNIVERSAL_:
+                    RaiseError(lexical, ERR_KIND_NOT_VAR)
+                LV_ = t_attrib(LV,None,LV(universal_))
+            else:
+                LV_ = t_attrib(LV,None,LV(p._.type))
+                code_generation.write("\tLOAD_REF "+"\n")
+            StackSem.append(LV_)
+
+        case SemanticRules.MC_RULE:
+            IDU_ = StackSem[-1]
+            f = IDU_._.object
+            if f.eKind != FUNCTION_:
+                MC_ = t_attrib(MC,None,MC(universal_,None,True))
+            else:
+                MC_ = t_attrib(MC,None,MC(f._.pRetType,f._.pParams,False))
+            StackSem.append(MC_)
+
+        case SemanticRules.LE_E_RULE:
+            E_ = StackSem.pop()
+            MC_ = StackSem[-1]
+            LE_ = t_attrib(LE,None,LE(None,None,MC_._.err,1))
+            if not MC_._.err:
+                p=MC_._.param 
+                if p == None:
+                    RaiseError(lexical, ERR_TOO_MANY_ARG)
+                    LE_._.err = True
+                else:
+                    if not type_check(p._.tipo,E_._.type):
+                        RaiseError(lexical, ERR_PARAM_TYPE)
+                    LE_._.param = p.pNext
+                    LE_._.n = n + 1
+            StackSem.append(LE_)
+
+        case SemanticRules.LE_LE_RULE:
+            E_ = StackSem.pop()
+            LE1_ = StackSem.pop()
+            LE0_ = t_attrib(LE,None,LE(None,None,L1_._.err,LE1_._.n))
+            if not LE1_._.err:
+                p = LE1_._.param
+                if p == None:
+                    RaiseError(lexical, ERR_TOO_MANY_ARG)
+                    LE0_._.err = True
+                else:
+                    if not type_check(p._.tipo,E_._.type):
+                        RaiseError(lexical, ERR_PARAM_TYPE)
+                    LE0_._.param = p.pNext
+                    LE0_._.n = n+1
+            StackSem.append(LE0_)
+
+        case SemanticRules.F_IDU_MC_RULE:
+            LE_ = StackSem.pop()
+            MC_ = StackSem.pop()
+            IDU_ = StackSem.pop()
+            f = IDU_._.object
+            F_ = t_attrib(F,None,F(MC_._.type))
+            if not LE_._.err:
+                if LE_._.n-1 < f._nParams and LE_._.n != 0:
+                    RaiseError(lexical, ERR_TOO_FEW_ARGS)
+                elif LE_._.n-1 > f._.nParams:
+                    RaiseError(lexical, ERR_TOO_MANY_ARG)
+            StackSem.append(F_)
+            code_generation.write("\tCALL "+"\n")
+
+        case SemanticRules.MT_RULE:
+            MT_ = t_attrib(MT,None,MT(label))
+            StackSem.append(MT_)
+            code_generation.write("\tTJMP_FW L"+str()+"\n")
+            label = label + 1
+
+        case SemanticRules.ME_RULE:
+            MT_ = StackSem[-1]
+            ME_._.label = label
+            ME_.t_nont = ME
+            StackSem.append(ME_)
+            code_generation.write("\tTJMP_FW L"+str(label)+"\n")
+            code_generation.write("L"+str(MT_._.label)+"\n")
+            label = label +1
+
+        case SemanticRules.MW_RULE:
+            print(MW_)
+            MW_ = StackSem.pop() ##
+            print(MW_._)
+            MW_._.label = label
+            StackSem.append(MW_)
+            code_generation.write("L"+str(label)+"\n")
+            label = label +1
+
+        case SemanticRules.M_BREAK_RULE:
+            MT_ = StackSem[-1]
+
+        case SemanticRules.M_CONTINUE_RULE:
+            pass
+
+        case SemanticRules.M_E_SEMICOLON:
+            E_ = StackSem.pop()
+            LV_ = StackSem.pop()
+            if not type_check(LV_._.type,E_._.type):
+                RaiseError(lexical, ERR_TYPE_MISMATCH)
+            t = LV_._.type
+            E0_._ = F(E_._.type)
+            StackSem.append(E0_)
+            if t._ == None:
+                code_generation.write("\tSTORE_REF 1\n")
+            else:
+                code_generation.write("\tSTORE_REF "+"\n")
+
+        code_generation.close()    
