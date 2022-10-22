@@ -74,3 +74,29 @@ def RaiseError(lexical: LexicalAnalyser, errCode: Errors):
             print("Variable not declared")
         case Errors.ERR_TYPE_EXPECTED:
             print("Type expected")
+        case Errors.ERR_BOOL_TYPE_EXPECTED:
+            print("Type boolean expected")
+        case Errors.ERR_TYPE_MISMATCH:
+            print("Type not expected")
+        case Errors.INVALID_TYPE:
+            print("Invalid type")
+        case Errors.ERR_KIND_NOT_STRUCT:
+            print("Expected struct type")
+        case Errors.ERR_FIELD_NOT_DECL:
+            print("Field not declared")
+        case Errors.ERR_KIND_NOT_ARRAY:
+            print("Expected array type")
+        case Errors.ERR_INVALID_INDEX_TYPE:
+            print("Invalid Index type")
+        case Errors.ERR_KIND_NOT_VAR:
+            print("Expected Var type")
+        case Errors.ERR_KIND_NOT_FUNCTION :
+            print("Expected function type")
+        case Errors.ERR_TOO_MANY_ARG:
+            print("Too many parameters")
+        case Errors.ERR_PARAM_TYPE:
+            print("Parameter type not expected")
+        case Errors.ERR_TOO_FEW_ARGS :
+            print("Too few parameters")
+        case Errors.ERR_RETURN_TYPE_MISMATCH :
+            print("Invalid return type")
