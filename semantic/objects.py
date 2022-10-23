@@ -20,69 +20,94 @@ class Object:
 
 class Var:
     pType: Object = None
+    nIndex: int = None
+    nSize: int = None
 
-    def __init__(self, ptype: Object):
-        self.ptype = ptype
+    def __init__(self, pType: Object, nIndex: int, nSize: int):
+        self.pType = pType
+        self.nIndex = nIndex
+        self.nSize = nSize
 
 
 class Param:
     pType: Object = None
+    nIndex: int = None
+    nSize: int = None
 
-    def __init__(self, ptype: Object):
-        self.pType = ptype
+    def __init__(self, pType: Object, nIndex: int, nSize: int):
+        self.pType = pType
+        self.nIndex = nIndex
+        self.nSize = nSize
 
 
 class Field:
     pType: Object = None
+    nIndex: int = None
+    nSize: int = None
 
-    def __init__(self, pType: Object):
+    def __init__(self, pType: Object, nIndex: int, nSize: int):
         self.pType = pType
+        self.nIndex = nIndex
+        self.nSize = nSize
 
 
 class Function:
     pRetType: Object = None
     pParams: Object = None
+    nIndex: int = None
+    nParams: int = None
+    nVars: int = None
 
-    def __init__(self, pRetType: Object, pParams: Object):
+    def __init__(self, pRetType: Object, pParams: Object, nIndex: int, nParams: int, nVars: int):
         self.pRetType = pRetType
         self.pParams = pParams
+        self.nIndex = nIndex
+        self.nParams = nParams
+        self.nVars = nVars
 
 
 class Array:
-    pElemType: Object
-    nNumElems: int
+    pElemType: Object = None
+    nNumElems: int = None
+    nSize: int = None
 
-    def __init__(self, pElemType: Object, nNumElems: int):
+    def __init__(self, pElemType: Object, nNumElems: int, nSize: int):
         self.pElemType = pElemType
         self.nNumElems = nNumElems
+        self.nSize = nSize
 
 
 class Struct:
     pFields: Object = None
+    nSize: int = None
 
-    def __init__(self, pFields):
+    def __init__(self, pFields: Object, nSize: int):
         self.pFields = pFields
+        self.nSize = nSize
 
 
 class Alias:
     pBaseType: Object = None
+    nSize: int = None
+    
 
-    def __init__(self, pBaseType: Object):
+    def __init__(self, pBaseType: Object, nSize: int):
         self.pBaseType = pBaseType
+        self.nSize = nSize
 
 
 class Type:
-    name: int
-    object: Object
+    pBaseType: Object = None
+    nSize: int = None
 
-    def __init__(self, name: int, object: Object):
-        self.name = name
-        self.object = object
+    def __init__(self, pBaseType: Object, nSize: int):
+        self.pBaseType = pBaseType
+        self.nSize = nSize
 
 
 class ID:
-    name: int
-    object: Object
+    name: int = None
+    object: Object = None
 
     def __init__(self, name: int, object: Object = None):
         self.name = name
@@ -90,22 +115,22 @@ class ID:
 
 
 class T:
-    type: Object
+    type: Object = None
 
     def __init__(self, type: Object):
         self.type = type
 
 
 class LI:
-    list: Object
+    list: Object = None
 
     def __init__(self, list: Object):
         self.list = list
 
 
 class BOOL:
-    type: Object
-    val: bool
+    type: Object = None
+    val: bool = None
 
     def __init__(
         self,
@@ -116,65 +141,77 @@ class BOOL:
         self.type = type
         
 class E:
-    type: Object
+    type: Object = None
 
     def __init__(self, type: Object):
         self.type = type
 
 class L:
-    type: Object
+    type: Object = None
 
     def __init__(self, type: Object):
         self.type = type
 
 class R:
-    type: Object
+    type: Object = None
 
     def __init__(self, type: Object):
         self.type = type
 
 class Y:
-    type: Object
+    type: Object = None
 
     def __init__(self, type: Object):
         self.type = type
 
 class F:
-    type: Object
+    type: Object = None
 
     def __init__(self, type: Object):
         self.type = type
 
 class LV:
-    type: Object
+    type: Object = None
 
     def __init__(self, type: Object):
         self.type = type
 
 class MC:
-    def __init__(self, type = None, param = None, err = None):
+    type: Object = None
+    param: Object = None
+    err: Object = None
+        
+    def __init__(self, type: Object, param: Object, err: Object):
         self.type = type
         self.param = param
         self.err = err
 
 class MT:
-    def __init__(self, label = None):
+    label: int = None
+    def __init__(self, label: int):
         self.label = label   
 
 class ME:
-    def __init__(self, label = None):
-        self.label = label
+    label: int = None
+    def __init__(self, label: int):
+        self.label = label 
 
 class MW:
-    def __init__(self, label = None):
-        self.label = label
+    label: int = None
+    def __init__(self, label: int):
+        self.label = label 
 
 class MA:
-    def __init__(self, label = None):
-        self.label = label
+    label: int = None
+    def __init__(self, label: int):
+        self.label = label 
 
 class LE:
-    def __init__(self, type = None, param = None, err = None, n = None):
+    type: Object = None
+    param: Object = None
+    err: Object = None
+    n: int = None
+    def __init__(self, type: Object, param: Object, err: Object, n: int):
         self.type = type
         self.param = param
         self.err = err
@@ -182,12 +219,16 @@ class LE:
 
 
 class TRUE:
-    def __init__(self, type = None, val = None):
+    type: Object = None
+    val: int = None
+    def __init__(self, type: Object, val: int):
         self.type = type
         self.val = val
 
 class FALSE:
-    def __init__(self, type = None, val = None):
+    type: Object = None
+    val: int = None
+    def __init__(self, type: Object, val: int):
         self.type = type
         self.val = val
 
@@ -195,15 +236,10 @@ class FALSE:
 
 class CHR:
     type: Object
-    pos: int
-    val: str
+    pos: int = None
+    val: str = None
 
-    def __init__(
-        self,
-        val: str,
-        pos: int,
-        type: Object = char_,
-    ):
+    def __init__(self, val: str, pos: int, type: Object = char_):
         self.val = val
         self.pos = pos
         self.type = type
@@ -214,12 +250,7 @@ class STR:
     pos: int
     val: str
 
-    def __init__(
-        self,
-        val: str,
-        pos: int,
-        type: Object = string_,
-    ):
+    def __init__(self, val: str, pos: int, type: Object = string_):
         self.val = val
         self.pos = pos
         self.type = type
@@ -230,12 +261,7 @@ class NUM:
     pos: int
     val: int
 
-    def __init__(
-        self,
-        val: int,
-        pos: int,
-        type: Object = int_,
-    ):
+    def __init__(self, val: int, pos: int, type: Object = int_):
         self.val = val
         self.pos = pos
         self.type = type
