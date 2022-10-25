@@ -46,6 +46,7 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
             EndBlock()
             DF_ = t_attrib(States.DF)
             StackSem(DF_)
+            print("END_FUNC"+"\n")
         case SemanticRules.T_INTEGER_RULE:
             T_ = t_attrib(States.T, T(int_))
             StackSem.append(T_)
@@ -434,19 +435,22 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
             F_ = t_attrib(F,None,F(char_))
             StackSem.append(F_)
             n = lexical.secondary_Token
-            print("\tLOAD_CONST "+"\n")
+            print("\tLOAD_CONST "+str(consts)+"\n")
+            consts+=1
         case SemanticRules.F_STR_RULE:
             STR_ = StackSem.pop()
             F_ = t_attrib(F,None,F(string_))
             StackSem.append(F_)
             n = lexical.secondary_Token
-            print("\tLOAD_CONST "+"\n")
+            print("\tLOAD_CONST "+str(consts)+"\n")
+            consts+=1
         case SemanticRules.F_NUM_RULE:
             NUM_ = StackSem.pop()
             F_ = t_attrib(F,None,F(int_))
             StackSem.append(F_)
             n = lexical.secondary_Token
-            print("\tLOAD_CONST "+"\n")
+            print("\tLOAD_CONST "+str(consts)+"\n")
+            consts+=1
         case SemanticRules.LV_DOT_RULE:
             ID_ = StackSem.pop()
             LV1_ = StackSem.pop()
@@ -467,7 +471,7 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
                 else:
                     LV0_ = t_attrib(LV,None,LV(p._.pType))
             StackSem.append(LV0_)
-            print("\tADD "+"\n")
+            print("\tADD "+str(p._.nIndex)+"\n")
         case SemanticRules.LV_SQUARE_RULE:
             E_ = StackSem.pop()
             LV1_ = StackSem.pop()
@@ -494,7 +498,7 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
                 LV_ = t_attrib(LV,None,LV(universal_))
             else:
                 LV_ = t_attrib(LV,None,LV(p._.type))
-                print("\tLOAD_REF "+"\n")
+                print("\tLOAD_REF "+str(p._.nIndex)+"\n")
             StackSem.append(LV_)
         case SemanticRules.MC_RULE:
             IDU_ = StackSem[-1]
@@ -546,11 +550,11 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
                 elif LE_._.n-1 > f._.nParams:
                     RaiseError(lexical, ERR_TOO_MANY_ARG)
             StackSem.append(F_)
-            print("\tCALL "+"\n"
+            print("\tCALL "+str(f._.nIndex)+"\n")
         case SemanticRules.MT_RULE:
             MT_ = t_attrib(MT,None,MT(label))
             StackSem.append(MT_)
-            print("\tTJMP_FW L"+str()+"\n")
+            print("\tTJMP_FW L"+str(label)+"\n")
             label = label + 1
         case SemanticRules.ME_RULE:
             MT_ = StackSem[-1]
@@ -566,7 +570,7 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
             print(MW_._)
             MW_._.label = label
             StackSem.append(MW_)
-            print("L"+str(label)+"\n")
+            print("L"+str(rLabel)+"\n")
             label = label +1
         case SemanticRules.M_BREAK_RULE:
             MT_ = StackSem[-1]
@@ -583,6 +587,6 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
             if t._ == None:
                 print("\tSTORE_REF 1\n")
             else:
-                print("\tSTORE_REF "+"\n")
+                print("\tSTORE_REF "+str(t._.nSize)+"\n")
 
          
