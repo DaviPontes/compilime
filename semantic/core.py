@@ -7,6 +7,7 @@ from semantic.typeAnalyzer import IS_TYPE_KIND, int_, char_, bool_, string_, uni
 StackSem = []
 label = 0
 consts = 0
+nFunc = 0
 
 def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
     
@@ -192,7 +193,8 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
             IDD_ = StackSem[-1]
             f = IDD_._.object
             f.eKind = FUNCTION_
-            f._ = Function(None,None)
+            f._ = Function(None,None,nFunc,0,0)
+            nFunc+=1
             NewBlock()
         case SemanticRules.U_IF_RULE:
             MT_ = StackSem.pop()
