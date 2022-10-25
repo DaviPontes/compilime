@@ -6,6 +6,7 @@ from semantic.typeAnalyzer import IS_TYPE_KIND, int_, char_, bool_, string_, uni
 
 StackSem = []
 label = 0
+consts = 0
 
 def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
     
