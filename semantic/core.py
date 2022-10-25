@@ -183,8 +183,9 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
             NB_:t_attrib = StackSem[len(StackSem) - 3]
             IDD_:t_attrib = StackSem[len(StackSem) - 4]
             f:Object = IDD_._.object
-            f.eKind = Kinds.ARRAY_TYPE_
-            f._ = Function(T_._.type, LP_._.list)
+            f.eKind = Kinds.FUNCTION_
+            f._ = Function(T_._.type,LP_._.list,f._.nIndex,LP_.nSize,LP_.nSize)
+            print("BEGIN_FUNC "+str(f._.nIndex)+" "+str(f._.nParams)+"\n")
         case SemanticRules.NF_RULE:
             IDD_ = StackSem[-1]
             f = IDD_._.object
