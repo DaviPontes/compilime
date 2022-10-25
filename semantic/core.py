@@ -570,7 +570,7 @@ def SemanticAnalysis(lexical: LexicalAnalyser, ruleNumber: int):
             print(MW_._)
             MW_._.label = label
             StackSem.append(MW_)
-            print("L"+str(rLabel)+"\n")
+            print("L"+str(label)+"\n")
             label = label +1
         case SemanticRules.M_BREAK_RULE:
             MT_ = StackSem[-1]
